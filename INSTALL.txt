@@ -1,0 +1,60 @@
+Copyright (C) InviNets, 2014.
+
+DESCRIPTION:
+
+The publish_sensor_readings.py script is designed to work
+in pair with the InviNets ThermoMesh (TM) environment monitoring solution.
+
+It converts raw readings from sensors to a standards-compliant
+SNMP format.
+
+An InviNets (TM) router can be configured to forward all readings
+it receives from wireless sensors to a given IP address as UDP packets.
+The publish_sensor_readings.py takes these packets and publishes their
+contents using SNMP.
+
+RUNNING THE SCRIPT:
+
+To run the script, you must have:
+ - a Windows or a Unix-compatible operating system (Linux, Mac OS X)
+ - a configuration file for your InviNets ThermoMesh solution obtained
+   from the InviNets support (contact support@invinets.com)
+ - a python 2.x installation on your system
+ - an SNMP reader application supporting SNMP v1 or SNMP v2
+
+To run the script you must:
+
+1) enter the invinets_snmp_publisher directory
+2) from there, run ``python publish_sensor_readings.py config.txt'', where
+   config.txt is the configuration file obtained from the InviNets website
+
+
+CUSTOMIZING THE PORT NUMBERS:
+
+Note that you can customize the ports used to receive the packets from
+the InviNets router and publish the SNMP readings with command line flags.
+Run python ``publish_sensor_readings.py -h'' for a full description.
+
+
+SNMP DATA TYPES:
+
+The readings are published with the standard LM-SENSORS MIB.
+In particular:
+
+lmTempSensorsDevice.N
+lmVoltSensorsDevice.N
+lmMiscSensorsDevice.N - gives the Asset Tag of the sensor nr. N. This
+                        Tag is printed on the cover of each sensor.
+
+lmTempSensorsValue.N - indicates the last temperature reading obtained
+                       from sensor nr. N. The value is given in
+                       milliCelcius.
+
+lmVoltSensorsValue.N - indicates the last battery voltage reported by
+                       sensor no N. The value is given in milliVolts.
+
+lmMiscSensorsValue.N - indicates the last humidity reading obtained by
+                       sensor no N. The value is an integer relative
+                       humidity percentage (RHP).
+
+
